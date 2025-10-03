@@ -1,0 +1,145 @@
+\def\MainLabel{ESE 2025}
+\documentclass[aspectratio=169]{beamer}
+\errorcontextlines=9999
+
+\usepackage[glows]{tikzpingus}
+\usetikzlibrary{decorations.text,backgrounds}
+\usepackage[active]{preview}
+\pgfsetlayers{very-background,background,main,middle,foreground}
+\def\StorePingu#1#2{\expandafter\newsavebox\csname PinguBox#1\endcsname \expandafter\setbox\csname PinguBox#1\endcsname=\hbox{\scalebox{.38}{\tikz{\pingu[#2]}}}}
+\definecolor{paletteA}{HTML}{A32638}
+% \colorlet{paletteA}{orange!80!pingu@red!80!pingu@yellow} % {green!70!blue}{pingu@blue} {teal} {pingu@red}
+
+\StorePingu{HangingPeter}{right wing=wave, eyes wink, blush, body type=tilt-left, tie=paletteA}
+\StorePingu{StandingSteve}{wings=grab,eyes=shiny,cup=paletteA,graduate,graduate tassel=paletteA}
+\StorePingu{HangingSpaceHugo}{left wing=wave,eyes=shock,right wing=shock,space helmet,shirt=pingu@silver,cloak=pingu@silver!80!pingu@black,cloak cap=!hide,:mix-all=60!white,cloak wings=false}
+\StorePingu{AscendedAgnes}{eyes=wink,eyes color=paletteA, devil wings=gray!3,wings=wave,halo, body type=legacy,:mix=6!white,:ghost=.05,devil fork left,devil fork left second=white,lightsaber right} % :ghost glow
+\StorePingu{CrowdBreaker}{eye patch right,left eye wink,heart,glow=white,left wing wave,glasses}
+
+% #confetto
+\def\cms{2mm}
+% calling conventions are for loosers
+\def\placeconfetto(#1,#2)#3#4#5{\fill[#3,rounded corners=.02*\cms,opacity=#5] ([xshift=#1*\paperwidth,yshift=-#2*\paperheight]current page.north west) +(0:.2*\cms+.515*\cms*rnd) foreach \a in {30,#4,...,360} {to[bend left=int(rand*6)] +(\a:.2*\cms+.515*\cms*rnd)} to[bend left=int(rand*6)] cycle;}
+
+% aww :C
+\pgfsetlayers{foreground,middle,main,background,very-background}
+\StorePingu{CrowdA}{:back,small,body=pingu@main!95!paletteA,hair 2=paletteA,wings wave,lollipop left=paletteA,feet color=pingu@yellow!95!brown}
+\StorePingu{CrowdB}{:back,large,body=pingu@main!86!brown,hair 3=paletteA,hat,left wing hug,feet color=pingu@yellow!90!brown}
+\StorePingu{CrowdC}{:back,body=pingu@main!93!black,hair 4=paletteA,right wing raise,flag right=darkgray!80!paletteA!50!black,right item flip}
+\StorePingu{CrowdD}{:back,hair 1=paletteA,cane right=pingu@bronze!80!brown,cane right raise=3mm,left wing raise}
+\StorePingu{CrowdE}{:back,large,wings=hug,body=pingu@main!93!paletteA}
+\StorePingu{CrowdF}{:back,large,wings=hug,body=pingu@main!93!paletteA!97!pingu@purple}
+\StorePingu{CrowdG}{:back,small,wings=wave,body type=legacy,conical hat=pingu@bronze!70!gray!70!pingu@black}
+\StorePingu{CrowdH}{:back,body type=chubby,headband=paletteA!80!black}
+\StorePingu{CrowdI}{:back,body type=chubby,pumpkin-hat=pingu@bronze!20!black!40!white!90!paletteA}
+\StorePingu{CrowdJ}{:back,body type=legacy,witch hat=paletteA!80!pingu@purple!80!white!50!pingu@black,witch hat ribbon=paletteA!80!black,broom left,left item flip}
+\StorePingu{CrowdK}{:back,body type=legacy,headphone=pingu@white!80!pingu@black}
+\StorePingu{CrowdL}{:back,body type=legacy,strawhat=white!60!pingu@black,strawhat ribbon=paletteA!80!black}
+\StorePingu{CrowdM}{:back,body type=legacy,pants=paletteA!70!pingu@bronze!90!pingu@main!90!black}
+\StorePingu{CrowdN}{:back,body type=legacy,shirt=pingu@main!90!black}
+\StorePingu{CrowdO}{:back,body type=legacy,horse right,right item flip}
+\StorePingu{CrowdP}{:back,large,body=pingu@main!86!brown,cloak=pingu@black,body head=pingu@black,feet color=pingu@black}
+\StorePingu{CrowdFillA}{:back,body=pingu@main!95!paletteA}
+\StorePingu{CrowdFillB}{:back,body=pingu@main!95!brown}
+\StorePingu{CrowdFillC}{:back,body=pingu@main!95!black}
+\StorePingu{CrowdFillD}{:back,body=pingu@main!95!pingu@purple}
+\StorePingu{CrowdFillE}{:back,body=pingu@main!95!paletteA,body type=chubby}
+
+
+\pgfsetlayers{very-background,background,main,middle,foreground}
+\begin{document}
+\preview
+\begin{frame}[plain]
+\begin{tikzpicture}[overlay,remember picture]
+   \coordinate (@) at (current page.center);
+   \def\eh{85pt}\def\ang{35}\def\ew{225pt}
+   \def\arcpath{++ (90+\ang:\ew\space and \eh) arc (90+\ang:90-\ang:\ew\space and \eh)}
+   % fake banner background (sloppy)
+   \draw[draw=gray!20,line width=1cm,line cap=round] ([yshift=-.8*\eh+4pt]@) \arcpath coordinate[pos=0] (@start) coordinate[pos=1] (@end) node[pos=.5,above=-2mm] (@standingsteve){\usebox\PinguBoxStandingSteve};
+   
+   \node[above=-7mm,scale=1.5] at(@standingsteve.north) {\usebox\PinguBoxAscendedAgnes};
+   \path[postaction={decorate},decoration={text along path, text={|\Huge\bfseries\color{black}|Herzlich Willkommen!},text align={fit to path}}] ([yshift=-0.85*\eh]@) \arcpath;
+   % second layer (really sloppy #hashtag)
+   \def\ang{10}\def\eh{125pt}
+   \draw[draw=paletteA,line width=7.5mm,line cap=round] ([yshift=-1.2*\eh+6pt]@) \arcpath coordinate[pos=0] (@start2) coordinate[pos=1] (@end2) node[pos=0,left=-3.2mm,rotate=50,yshift=1mm] {\usebox\PinguBoxHangingSpaceHugo};
+   \path[postaction={decorate},decoration={text along path, text={|\LARGE\bfseries\color{white}|\MainLabel},text align={fit to path}}] ([yshift=-1.2*\eh]@) \arcpath;
+   % hanging lines
+   \pgfonlayer{background}\scope[gray!60,thick]
+   \draw (@start) -- (@start|-current page.north);
+   \draw (@end) -- (@end|-current page.north) node[pos=.5,rotate=10,right=-1.33mm] {\usebox\PinguBoxHangingPeter};
+   % who is to lazy to do path intersects?! I am!
+   \draw (@start2) -- ++(0,.33*\eh);
+   \draw (@end2) -- ++(0,.33*\eh);
+   \endscope\endpgfonlayer
+   
+   % fancy dancy crowd
+   \scope[shift=(current page.south),yshift=-.66mm]
+   
+   \node[above=.75mm,xshift=.4\paperwidth] {\usebox\PinguBoxCrowdD};
+   \node[above=.66mm,xshift=-.1\paperwidth] {\usebox\PinguBoxCrowdF};
+   \node[above=.5mm,xshift=-.16\paperwidth] {\usebox\PinguBoxCrowdE};
+   \node[above=.4mm,xshift=.47\paperwidth] {\usebox\PinguBoxCrowdFillC};
+   \node[above=.25mm,xshift=-.35\paperwidth] {\usebox\PinguBoxCrowdF};
+   \node[above=.25mm,xshift=-.3\paperwidth] {\usebox\PinguBoxCrowdFillA};
+   \node[above=.25mm,xshift=-.25\paperwidth] {\usebox\PinguBoxCrowdFillA};
+   \node[above=.2mm,xshift=.25\paperwidth] {\usebox\PinguBoxCrowdG};
+   \node[above=.2mm,xshift=.124\paperwidth] {\usebox\PinguBoxCrowdFillA};
+   \node[above=.165mm,xshift=.075\paperwidth] {\usebox\PinguBoxCrowdK};
+   \node[above=.15mm,xshift=-.4\paperwidth] {\usebox\PinguBoxCrowdA};
+   \node[above=0mm,xshift=.05\paperwidth] {\usebox\PinguBoxCrowdH};
+   \node[above=0mm,xshift=.0\paperwidth] {\usebox\PinguBoxCrowdM};
+   \node[above=0mm,xshift=-.23\paperwidth] {\usebox\PinguBoxCrowdI};
+   \node[above=-.25mm,xshift=-.15\paperwidth] {\usebox\PinguBoxCrowdP};
+   \node[above=-.5mm,xshift=.15\paperwidth] {\usebox\PinguBoxCrowdE};
+   \node[above=-.5mm,xshift=.24\paperwidth] {\usebox\PinguBoxCrowdFillE};
+   \node[above=-.65mm,xshift=-.075\paperwidth] {\usebox\PinguBoxCrowdL};
+   \node[above=-.75mm,xshift=-.05\paperwidth] {\usebox\PinguBoxCrowdF};
+   \node[above=-1mm,xshift=.35\paperwidth] {\usebox\PinguBoxCrowdK};
+   \node[above=-1mm,xshift=-.2\paperwidth] {\usebox\PinguBoxCrowdB};
+   \node[above=-1mm,xshift=.2\paperwidth] {\usebox\PinguBoxCrowdC};
+   \node[above=-1mm,xshift=-.44\paperwidth] {\usebox\PinguBoxCrowdFillB};
+   \node[above=-1mm,xshift=.5\paperwidth] {\usebox\PinguBoxCrowdFillC};
+   \node[above=-1mm,xshift=.45\paperwidth] {\usebox\PinguBoxCrowdFillD};
+   \node[above=-1mm,xshift=.012\paperwidth] {\usebox\PinguBoxCrowdFillD};
+   \node[above=-1mm,xshift=-.45\paperwidth] {\usebox\PinguBoxCrowdFillC};
+   \node[above=-1mm,xshift=-.48\paperwidth] {\usebox\PinguBoxCrowdN};
+   \node[above=-2mm,xshift=.29\paperwidth] {\usebox\PinguBoxCrowdJ};
+   \node[above=-2mm,xshift=-.325\paperwidth] {\usebox\PinguBoxCrowdO};
+   \node[above=-2.5mm,xshift=.1\paperwidth] {\usebox\PinguBoxCrowdBreaker};
+   \pgfmathdeclarerandomlist{filler}{{CrowdFillA}{CrowdFillB}{CrowdFillC}{CrowdFillD}{CrowdFillE}}
+   \foreach \l in {-.5,-.46,...,-.03,0,.05,0.15,0.2,...,.45,.466,.5} {
+      \pgfmathsetmacro\yshift{abs(rand)*.5}%
+      \pgfmathsetmacro\xshift{rand*.13}%
+      \pgfmathrandomitem{\filler}{filler}%
+      % \typeout{Random for \l: \filler}
+      \node[above=-4.1mm-\yshift mm,xshift=\l*\paperwidth + \xshift mm] {\expandafter\usebox\csname PinguBox\filler\endcsname};
+   }
+   \endscope
+   
+   \pgfonlayer{very-background}
+   \typeout{Reached Party Stage, HYPERHYPER!}
+   
+   % grid me
+   \pgfmathdeclarerandomlist{colors}{{green}{gray}{blue}{paletteA}{red}{yellow}{paletteA}{white}{orange}{purple}{pink}{brown}{white}{black}}
+   \pgfmathdeclarerandomlist{iniangle}{{60}{75}{90}{90}{100}{120}{120}{120}{120}}
+   \foreach \gridoffset in {0,.03} {
+      \typeout{Ofsetto-Paletti: \gridoffset}
+      \foreach \yc in {0,0.035,0.045,0.08,0.13,...,1} {
+         \pgfmathsetmacro\topbias{min(max(0.05,-0.085+\yc), .25)}
+         \foreach \xc in {0,0.0475,...,1} {% 
+            \typeout{at: \xc,\yc}%
+            % this could have been fpeval
+            \pgfmathsetmacro\ycord{\yc+rand*.01-abs(rand)*\topbias+\gridoffset}
+            \pgfmathsetmacro\xcord{\xc+rand*.0175+\gridoffset}
+            \pgfmathsetmacro\lopacity{.1+abs(rand*.25)}
+            \pgfmathrandomitem{\lacolor}{colors}
+            \pgfmathrandomitem{\lainiangle}{iniangle}
+            \placeconfetto(\xcord,\ycord){\lacolor!70!white!70!paletteA}{\lainiangle}{\lopacity}%
+         }
+      }
+   }
+   \endpgfonlayer
+\end{tikzpicture}
+\end{frame}
+\endpreview
+\end{document}
